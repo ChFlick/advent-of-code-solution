@@ -6,10 +6,15 @@ declare module 'vue' {
   export interface GlobalComponents {
     Footer: typeof import('./src/components/Footer.vue')['default']
     IconCarbonCampsite: typeof import('~icons/carbon/campsite')['default']
+    IconCarbonDataTableReference: typeof import('~icons/carbon/data-table-reference')['default']
+    IconCarbonInput: typeof import('~icons/carbon/input')['default']
     IconCarbonLogoGithub: typeof import('~icons/carbon/logo-github')['default']
     IconCarbonMoon: typeof import('~icons/carbon/moon')['default']
+    IconCarbonNumber1: typeof import('~icons/carbon/number1')['default']
+    IconCarbonNumber2: typeof import('~icons/carbon/number2')['default']
     IconCarbonPedestrian: typeof import('~icons/carbon/pedestrian')['default']
     IconCarbonSun: typeof import('~icons/carbon/sun')['default']
+    SolutionPage: typeof import('./src/components/SolutionPage.vue')['default']
   }
 }
 

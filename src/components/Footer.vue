@@ -1,14 +1,5 @@
 <template>
-  <nav>
-    <button @click="toggleDark()">
-      <div v-if="isDark">
-        <icon-carbon-moon />
-      </div>
-      <div v-else>
-        <icon-carbon-sun />
-      </div>
-    </button>
-
+  <nav class="footer">
     <a
       class="icon-btn"
       rel="noreferrer"
@@ -18,19 +9,37 @@
     >
       <icon-carbon-logo-github />
     </a>
+
+    <button @click="toggleDark()">
+      <div v-if="isDark">
+        <icon-carbon-moon />
+      </div>
+      <div v-else>
+        <icon-carbon-sun />
+      </div>
+    </button>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue-demi'
-import { isDark, toggleDark } from '@/composables'
+import { defineComponent } from 'vue-demi';
+import { isDark, toggleDark } from '@/composables';
 
 export default defineComponent({
   setup() {
     return {
       isDark,
       toggleDark,
-    }
+    };
   },
-})
+});
 </script>
+
+<style lang="scss" scoped>
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 30px;
+}
+</style>

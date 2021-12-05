@@ -1,7 +1,13 @@
 <template>
   <div>
-    <button @click="$router.back()">
-      Back
+    <button @click="$router.push({name: 'Home'})">
+      Home
+    </button>
+    <button @click="$router.push(previousPuzzlePath)">
+      Previous Puzzle
+    </button>
+    <button @click="$router.push(nextPuzzlePath)">
+      Next Puzzle
     </button>
 
     <h1>Solution for {{ props.year }} - {{ props.day }}</h1>
@@ -148,6 +154,11 @@ function benchmarkSecond() {
     }
   });
 }
+
+const day = parseInt(props.day);
+const year = parseInt(props.year);
+const previousPuzzlePath = (day === 1) ? `/solutions/${year - 1}/25` : `/solutions/${year}/${(day - 1).toString().padStart(2, '0')}`;
+const nextPuzzlePath = (day === 25) ? `/solutions/${year + 1}/01` : `/solutions/${year}/${(day + 1).toString().padStart(2, '0')}`;
 </script>
 
 <style lang="scss" scoped>

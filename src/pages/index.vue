@@ -26,3 +26,9 @@ const solutionRoutes = router.options.routes.filter(route => /^\/solutions\/\d{4
   margin-bottom: 2em  ;
 }
 </style>
+
+<route>
+{
+  name: "Home",
+}
+</route>

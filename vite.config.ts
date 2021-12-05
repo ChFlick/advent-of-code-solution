@@ -1,5 +1,4 @@
 import path from 'path';
-import { readdirSync } from 'fs';
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import Pages from 'vite-plugin-pages';

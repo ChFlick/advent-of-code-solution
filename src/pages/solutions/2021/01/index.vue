@@ -2,7 +2,7 @@
   <SolutionPage
     year="2021"
     day="01"
-    :initialInput="input"
+    :initial-input="input"
     :solution="solution"
   />
 </template>

@@ -1,10 +1,14 @@
 <template>
   <div>
+    <button @click="$router.back()">
+      Back
+    </button>
+
     <h1>Solution for {{ props.year }} - {{ props.day }}</h1>
 
-    <label>
+    <label class="textarea">
       <span class="label"><icon-carbon-data-table-reference />Input</span>
-      <textarea id="input" v-model="input" name="input" cols="30" rows="10" />
+      <textarea id="input" v-model="input" name="input" rows="10" />
     </label>
 
     <div>
@@ -150,5 +154,9 @@ function benchmarkSecond() {
 .label {
   display: flex;
   column-gap: 0.5em;
+}
+
+.textarea {
+  width: 100%;
 }
 </style>

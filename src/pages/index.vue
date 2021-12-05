@@ -1,7 +1,10 @@
 <template>
+  <h1>Advent of Code Solutions & Solver</h1>
+
+  <h2>Puzzles</h2>
   <div class="routes">
-    <router-link v-for="route of allRoutes" :key="route.name" :to="route">
-      {{ route.name }}
+    <router-link v-for="route of solutionRoutes" :key="route.name" :to="route">
+      {{ route.path.split("/")[2] }} - {{ route.path.split("/")[3] }}
     </router-link>
   </div>
 </template>
@@ -13,13 +16,13 @@ import { ref } from 'vue-demi';
 const name = ref('');
 
 const router = useRouter();
-const allRoutes = router.options.routes;
+const solutionRoutes = router.options.routes.filter(route => /^\/solutions\/\d{4}\/\d{2}$/.test(route.path));
 </script>
 
 <style lang="scss" scoped>
 .routes {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2em;
+  margin-bottom: 2em  ;
 }
 </style>

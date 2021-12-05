@@ -3,11 +3,19 @@
     <a
       class="icon-btn"
       rel="noreferrer"
-      href="https://github.com/antfu/vitesse-lite"
+      href="https://github.com/ChFlick/advent-of-code-solutions"
       target="_blank"
-      title="GitHub"
+      title="Source Code on GitHub"
     >
-      <icon-carbon-logo-github />
+      <span class="nav-text"><icon-carbon-logo-github />Source Code</span>
+    </a>
+    <a
+      rel="noreferrer"
+      href="https://adventofcode.com/"
+      target="_blank"
+      title="Advent of Code"
+    >
+      Advent of Code
     </a>
 
     <button @click="toggleDark()">
@@ -41,5 +49,11 @@ export default defineComponent({
   justify-content: space-between;
   flex-direction: row;
   margin-top: 30px;
+  align-items: center;
+}
+
+.nav-text {
+  display: flex;
+  gap: 0.5em;
 }
 </style>

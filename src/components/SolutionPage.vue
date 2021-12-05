@@ -92,7 +92,7 @@ async function benchmarkBoth() {
 async function runFirst() {
   return new Promise((resolve, reject) => {
     try {
-      firstResult.value = props.solution.first(input.value);
+      firstResult.value = `${props.solution.first(input.value.trim())}`;
       resolve(firstResult.value);
     }
     catch (error) {
@@ -106,7 +106,7 @@ function benchmarkFirst() {
     try {
       const t1 = performance.now();
       for (let i = 0; i < 10000; i++) {
-        props.solution.first(input.value);
+        props.solution.first(input.value.trim());
       }
 
       const t2 = performance.now();
@@ -122,7 +122,7 @@ function benchmarkFirst() {
 function runSecond() {
   return new Promise((resolve, reject) => {
     try {
-      secondResult.value = props.solution?.second?.(input.value) ?? '';
+      secondResult.value = `${props.solution?.second?.(input.value.trim())}` ?? '';
       resolve(secondResult.value);
     }
     catch (error) {
@@ -136,7 +136,7 @@ function benchmarkSecond() {
     try {
       const t1 = performance.now();
       for (let i = 0; i < 10000; i++) {
-        props.solution?.second?.(input.value);
+        props.solution?.second?.(input.value.trim());
       }
 
       const t2 = performance.now();

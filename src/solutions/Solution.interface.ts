@@ -1,4 +1,4 @@
 export interface Solution {
-  first: (input: string) => string
-  second?: (input: string) => string
+  first: (input: string) => string | number
+  second?: (input: string) => string | number
 }

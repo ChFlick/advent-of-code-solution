@@ -19,21 +19,29 @@ export const solution: Solution = {
 
     return currentFish.length;
   },
-  // second(input: string) {
-  //   function getChildCountAtEndOfCycle(daysUntilReproduce: number, remainingDays: number): number {
-  //     if (daysUntilReproduce > remainingDays) {
-  //       return 1;
-  //     }
-  //
-  //     const remainingDaysToReproduce = remainingDays - daysUntilReproduce;
-  //     const timesReproduced = Math.floor(remainingDaysToReproduce / 7);
-  //     const steps = Array.from({ length: timesReproduced }, (_, i) => 7 + i * 7);
-  //     return steps.reduce((acc, step) => acc + getChildCountAtEndOfCycle(8, step), 1);
-  //   }
-  //   const currentFish = input.split(',').map(Number);
-  //
-  //   const result = currentFish.reduce((acc, fish) => acc + getChildCountAtEndOfCycle(fish, 80), 0);
-  //
-  //   return result;
-  // },
+  second(input: string) {
+    let fishByRemainingStatus: Record<number, number> = input.split(',')
+      .map(Number)
+      .reduce((fishByDay: Record<number, number>, fish) => {
+        fishByDay[fish] = fishByDay[fish] ? fishByDay[fish] + 1 : 1;
+        return fishByDay;
+      }, {});
+
+    for (let i = 0; i < 256; i++) {
+      const newRemainingFish: Record<number, number> = {};
+      Object.keys(fishByRemainingStatus).forEach((remainingFish) => {
+        const fish = Number(remainingFish);
+        if (fish === 0) {
+          newRemainingFish[6] = (newRemainingFish[6] || 0) + fishByRemainingStatus[fish];
+          newRemainingFish[8] = fishByRemainingStatus[fish];
+        }
+        else {
+          newRemainingFish[fish - 1] = (newRemainingFish[fish - 1] || 0) + fishByRemainingStatus[fish];
+        }
+      });
+      fishByRemainingStatus = newRemainingFish;
+    }
+
+    return Object.values(fishByRemainingStatus).reduce((total, fish) => total + fish, 0);
+  },
 };

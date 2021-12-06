@@ -1,6 +1,7 @@
 import { Solution } from '@/solutions/Solution.interface';
 
 export const solution: Solution = {
+  benchmarkRuns: 1,
   first: (input: string) => {
     let currentFish = input.split(',').map(Number);
 

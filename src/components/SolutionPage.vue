@@ -111,7 +111,7 @@ function benchmarkFirst() {
   return new Promise((resolve, reject) => {
     try {
       const t1 = performance.now();
-      for (let i = 0; i < 10000; i++) {
+      for (let i = 0; i < (props.solution.benchmarkRuns ?? 1000); i++) {
         props.solution.first(input.value.trim());
       }
 
@@ -141,7 +141,7 @@ function benchmarkSecond() {
   return new Promise((resolve, reject) => {
     try {
       const t1 = performance.now();
-      for (let i = 0; i < 10000; i++) {
+      for (let i = 0; i < (props.solution.benchmarkRuns ?? 1000); i++) {
         props.solution?.second?.(input.value.trim());
       }
 

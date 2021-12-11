@@ -1,7 +1,7 @@
 import { Solution } from '@/solutions/Solution.interface';
 
 export const solution: Solution = {
-  benchmarkRuns: 5,
+  benchmarkRuns: 1000,
   first(input: string) {
     const BRACKET_PAIRS: Record<string, string> = {
       '(': ')',

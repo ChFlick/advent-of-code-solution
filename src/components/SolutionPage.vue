@@ -11,6 +11,9 @@
     </button>
 
     <h1>Solution for {{ props.year }} - {{ props.day }}</h1>
+    <p v-if="notice">
+      {{ notice }}
+    </p>
 
     <label class="textarea">
       <span class="label"><icon-carbon-data-table-reference />Input</span>
@@ -25,6 +28,11 @@
         Benchmark
       </button>
     </div>
+
+    <label>
+      <span class="label">Benchmark Runs</span>
+      <input id="benechmarkRuns" v-model="benchmarkRuns" type="number" name="benechmarkRuns">
+    </label>
     <br>
 
     <label>
@@ -71,6 +79,7 @@ const props = defineProps<{
   day: string
   initialInput: string
   solution: Solution
+  notice?: string
 }>();
 
 const input = ref(props.initialInput);
@@ -80,6 +89,8 @@ const secondResult = ref('');
 
 const firstBenchmark = ref(0);
 const secondBenchmark = ref(0);
+
+const benchmarkRuns = ref(props.solution.benchmarkRuns ?? 1000);
 
 async function runBoth() {
   await Promise.all([
@@ -96,63 +107,39 @@ async function benchmarkBoth() {
 }
 
 async function runFirst() {
-  return new Promise((resolve, reject) => {
-    try {
-      firstResult.value = `${props.solution.first(input.value.trim())}`;
-      resolve(firstResult.value);
-    }
-    catch (error) {
-      reject(error);
-    }
-  });
+  const result = await props.solution.first(input.value.trim());
+  firstResult.value = result.toString();
+  return result.toString();
 }
 
-function benchmarkFirst() {
-  return new Promise((resolve, reject) => {
-    try {
-      const t1 = performance.now();
-      for (let i = 0; i < (props.solution.benchmarkRuns ?? 1000); i++) {
-        props.solution.first(input.value.trim());
-      }
+async function benchmarkFirst() {
+  const t1 = performance.now();
+  for (let i = 0; i < benchmarkRuns.value; i++) {
+    await props.solution.first(input.value.trim());
+  }
 
-      const t2 = performance.now();
-      firstBenchmark.value = t2 - t1;
-      resolve(firstBenchmark.value);
-    }
-    catch (error) {
-      reject(error);
-    }
-  });
+  const t2 = performance.now();
+  firstBenchmark.value = t2 - t1;
+
+  return firstBenchmark.value;
 }
 
-function runSecond() {
-  return new Promise((resolve, reject) => {
-    try {
-      secondResult.value = `${props.solution?.second?.(input.value.trim())}` ?? '';
-      resolve(secondResult.value);
-    }
-    catch (error) {
-      reject(error);
-    }
-  });
+async function runSecond() {
+  const result = await props.solution?.second?.(input.value.trim()) ?? '';
+  secondResult.value = result.toString();
+  return result.toString();
 }
 
-function benchmarkSecond() {
-  return new Promise((resolve, reject) => {
-    try {
-      const t1 = performance.now();
-      for (let i = 0; i < (props.solution.benchmarkRuns ?? 1000); i++) {
-        props.solution?.second?.(input.value.trim());
-      }
+async function benchmarkSecond() {
+  const t1 = performance.now();
+  for (let i = 0; i < benchmarkRuns.value; i++) {
+    await props.solution?.second?.(input.value.trim());
+  }
 
-      const t2 = performance.now();
-      secondBenchmark.value = t2 - t1;
-      resolve(secondBenchmark.value);
-    }
-    catch (error) {
-      reject(error);
-    }
-  });
+  const t2 = performance.now();
+  secondBenchmark.value = t2 - t1;
+
+  return secondBenchmark.value;
 }
 
 const day = parseInt(props.day);
